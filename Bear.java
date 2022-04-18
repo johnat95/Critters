@@ -19,12 +19,12 @@ public class Bear extends Critter {
             return Action.LEFT;
     }
 
+    //used a ternary operation here to save space
     @Override
     public Color getColor() {
         return isPolar ? Color.WHITE : Color.BLACK;
     }
 
-//ternary here?
     @Override
     public String toString() {
         String walkSymbol = null;
@@ -32,7 +32,7 @@ public class Bear extends Critter {
         if (walkState) {
             walkSymbol = "/";
             walkState = false;
-        } else if (!walkState) {
+        } else {
             walkSymbol = "\\";
             walkState = true;
         }
