@@ -1,3 +1,6 @@
+//In this class, we are making a bear critter that can be
+//either a polar bear (white) or a black bear
+
 import java.awt.*;
 
 public class Bear extends Critter {
@@ -19,7 +22,7 @@ public class Bear extends Critter {
             return Action.LEFT;
     }
 
-    //used a ternary operation here to save space
+    //used a ternary operation here to save space ~Nathan
     @Override
     public Color getColor() {
         return isPolar ? Color.WHITE : Color.BLACK;

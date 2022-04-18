@@ -1,3 +1,6 @@
+//In this class, we are making a giant critter that is a 3 charecter
+//string repeating the phrase "fee, fie, foe fum"
+
 import java.awt.*;
 import java.util.Random;
 
