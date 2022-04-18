@@ -20,22 +20,38 @@ public class Orca extends Critter {
         //infects the neighbor in front
         if (info.getFront() == Neighbor.OTHER) {
             return Action.INFECT;
-        //if an orca is backed against a wall by a flytrap, this else/if will help break it up
-        } else if (info.getRight() == Neighbor.OTHER &&
-                   info.getBack() == Neighbor.WALL) {
+
+        //If an Orca is moving along the wall clockwise, it turns around when it bumps into another ally
+        } else if (info.getFront() != Neighbor.EMPTY &&
+                   info.getLeft() == Neighbor.WALL) {
             return Action.RIGHT;
-        //this if/else has a 50% chance of making orcas move together in a "pod"
-        //if orcas get too conjested looping endlessly around the map, this if/else breaks them up
+        } else if (info.getBack() == Neighbor.WALL &&
+                   info.getLeft() == Neighbor.SAME &&
+                   info.getRight() == Neighbor.EMPTY) {
+            return Action.RIGHT;
+
+        //If an Orca is moving along the wall counter-clockwise, it turns around when it bumps into another ally
+        } else if (info.getFront() != Neighbor.EMPTY &&
+                   info.getRight() == Neighbor.WALL) {
+            return Action.LEFT;
+        } else if (info.getBack() == Neighbor.WALL &&
+                   info.getRight() == Neighbor.SAME &&
+                   info.getLeft() == Neighbor.EMPTY) {
+            return Action.LEFT;
+
+        //when an Orca meets with an ally or a wall, there is a 50% chance it will turn right
         } else if (info.getFront() == Neighbor.WALL ||
-                info.getFront() != Neighbor.EMPTY &&
-                info.getBack() != Neighbor.EMPTY) {
-            return Action.LEFT;
-        //this if/else keeps orcas moving forward
-        } else if (info.getFront() == Neighbor.EMPTY) {
-            return Action.HOP;
-        //whenever a lone orca hits a wall, they will turn left
+            info.getFront() == Neighbor.SAME) {
+            if (heads)
+                return Action.RIGHT;
+            else
+                return Action.LEFT;
+
+        //Orca will hop
         } else {
-            return Action.LEFT;
+            return Action.HOP;
+
+        //good luck getting
         }
     }
 

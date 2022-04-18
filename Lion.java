@@ -6,6 +6,7 @@ public class Lion extends Critter {
     private int step;
     private Object[] colorArray = {Color.BLUE, Color.RED, Color.GREEN};
     private Color initialColor;
+    private boolean isPolar;
 
     public Lion() {
         this.step = 0;
