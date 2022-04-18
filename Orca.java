@@ -1,13 +1,10 @@
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+
 import java.awt.*;
-import java.util.Random;
+
 
 public class Orca extends Critter{
-    private int stepCount;
-    private int colorIndexCount;
-    private Color directionalColor;
 
-    private int podFailCount;
+    private Color directionalColor;
 
     //moveAction is static to allow all instances of Orca to
     //make the same move.
@@ -16,9 +13,6 @@ public class Orca extends Critter{
     //Programmer: Joey
     @Override
     public Action getMove(CritterInfo info) {
-
-        Random rand = new Random();
-        boolean heads = rand.nextBoolean();
 
         //infects the neighbor in front
         if (info.getFront() == Neighbor.OTHER) {
@@ -65,15 +59,4 @@ public class Orca extends Critter{
         }
     }
 
-    private boolean ifInPod(CritterInfo info){
-        Neighbor[] neighbors = {info.getFront(), info.getBack(), info.getLeft(), info.getRight()};
-
-        for(int i = 0; i<neighbors.length; i++){
-            if(neighbors[i].equals(Neighbor.SAME)){
-                return true;
-            }
-        }
-        podFailCount++;
-        return false;
-    }
 }
