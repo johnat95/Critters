@@ -6,15 +6,19 @@ import java.util.function.Predicate;
 
 public class Lion extends Critter {
 
-    int stepCount;
-    int indexCount;
+    private int stepCount;
+    private int indexCount;
+
+
 
     Random rand = new Random();
 
     Color[] colorArray = {Color.BLUE, Color.RED, Color.GREEN};
 
     public Lion(){
-
+        // init step count at -1 to accommodate call to
+        //to string during simulation set up.
+        this.stepCount = -1;
         indexCount = rand.nextInt(3);
     }
 
@@ -41,11 +45,8 @@ public class Lion extends Critter {
 
     @Override
     public Color getColor() {
-        System.out.println("Step: "+ stepCount);
-        System.out.println("Index: "+ indexCount);
 
-
-        //change array every third step.
+        //randomly change index every third step.
         if(stepCount % 3 == 0
         && stepCount != 0){
 
@@ -57,6 +58,8 @@ public class Lion extends Critter {
         //ensures int max value is never reached
        if(stepCount >=3){
            stepCount = 0;
+       }else{
+           stepCount++;
        }
 
 

@@ -1,10 +1,11 @@
 import java.awt.*;
-import java.util.Random;
+
 
 public class Bear extends Critter{
 
     private boolean isPolar;
     private boolean walkState = true;
+    private String currentSymbol = "/";
 
     public Bear(boolean polar){
         this.isPolar = polar;
@@ -12,6 +13,9 @@ public class Bear extends Critter{
 
     @Override
     public Action getMove(CritterInfo info) {
+
+        toggleCurrentSymbol();
+
         if(info.getFront().equals(Neighbor.OTHER)){
             return Action.INFECT;
         }
@@ -32,14 +36,20 @@ public class Bear extends Critter{
 
     @Override
     public String toString() {
-    //This method alternates walkState between true and false
-    //and returning "/" and "\". It takes no parameters
-    // and returns a string.
+        return currentSymbol;
+    }
 
-     if(walkState){
-            return  "/";
+    //This method alternates walkState between true and false
+    //and currentSymbol between "/" and "\". It takes no parameters
+    // and returns nothing;
+    private void toggleCurrentSymbol(){
+        if(walkState){
+            walkState = false;
+            currentSymbol = "/";
         }
         walkState = true;
-        return "\\";
+        currentSymbol = "\\";
     }
+
+
 }
