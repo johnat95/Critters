@@ -1,31 +1,35 @@
-//In this class, we are making a giant critter that is a 3 charecter
-//string repeating the phrase "fee, fie, foe fum"
+//Programmer: Nathan Johnston
+//This class contains variables and methods to provide color,
+//display texts and movement behavior of the Giant Critter
 
 import java.awt.*;
-import java.util.Random;
 
 public class Giant extends Critter {
 
-    private int step;
-    private Object[] giantArray = {"fee","fie","foe","fum"};
-    private int wordCount;
-    private String word;
+    private int stepCount;
 
-    public Giant() {
-        this.word = "fee";
-        this.step = 0;
-        this.wordCount = 0;
+    private int wordIndexCount;
+
+    private String[] wordDisplayArray = {"fee","fie", "foe", "fum"};
+
+    public Giant(){
+        // init step count at -1 to accommodate call to
+        //to string during simulation set up.
+        this.stepCount = -1;
     }
 
     @Override
     public Action getMove(CritterInfo info) {
-        if(info.getFront() == Neighbor.OTHER)
+
+        if(info.getFront().equals(Neighbor.OTHER)){
             return Action.INFECT;
-        else if(info.getFront() == Neighbor.WALL ||
-                info.getFront() == Neighbor.SAME)
-            return Action.RIGHT;
-        else
+        }
+
+        if(info.getFront().equals(Neighbor.EMPTY)){
             return Action.HOP;
+        }
+
+        return Action.RIGHT;
     }
 
     @Override
@@ -35,13 +39,33 @@ public class Giant extends Critter {
 
     @Override
     public String toString() {
-        if((this.step % 6) == 0) {
-            this.wordCount %= 4;
-            this.word = (String) giantArray[wordCount];
-            this.wordCount++;
-        }
-        step++;
-        return word;
-    }
-}
 
+        //change array every 6th step.
+        if(stepCount % 6 == 0
+                && stepCount != 0){
+
+            //increment or resent indexCount if count
+            //reaches the end of the word array
+            if(wordIndexCount >= wordDisplayArray.length-1){
+
+                wordIndexCount = 0;
+            }else{
+                wordIndexCount++;
+            }
+
+        }
+
+        //reset step count once it gets to 6,
+        //ensures int max value is never reached
+        if(stepCount >=6){
+            stepCount = 1;
+        }else{
+            stepCount++;
+        }
+
+
+        return wordDisplayArray[wordIndexCount];
+    }
+
+
+}

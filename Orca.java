@@ -15,6 +15,8 @@ public class Orca extends Critter{
     private Color directionalColor;
     private Action moveAction = null;
 
+    private String  critterSymbol = "O";
+
     //Programmer: Joey
     @Override
     public Action getMove(CritterInfo info) {
@@ -59,28 +61,32 @@ public class Orca extends Critter{
         } else {
             moveAction = Action.HOP;
         }
-        // Programmer: Nathan
-        // by returning moveAction at the end of the statement rather
-        // than returning after every if/else, we can also modify the color
-        // of the Orcas depending on their direction
+
         setDirectionalColor(info.getDirection());
         return moveAction;
     }
 
-    //Programmer: Nathan
+    //Programmer: Nathan Johnston
+    //this method returns the directionalColor variable, containing
+    //the display color of the critters text
     @Override
     public Color getColor() {
+
         return directionalColor;
     }
 
     @Override
     public String toString() {
-        return "O";
+
+        return critterSymbol;
     }
 
+    //Programmer: Nathan Johnston
+    //this method sets the directionalColor variable based on the direction
+    //the orca is traveling. Its takes a direction object, the direction it
+    //is facing, in its paramaters and returns nothing.
     private void setDirectionalColor(Direction direction){
-        if(direction.equals(Direction.NORTH)
-                || direction.equals(Direction.EAST)){
+        if(direction.equals(Direction.NORTH)){
             directionalColor = Color.WHITE;
         }else{
             directionalColor = Color.BLACK;
